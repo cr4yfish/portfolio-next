@@ -1,0 +1,147 @@
+:root {
+    --light_orange: #F7AB3C;
+    --medium_orange: #F1811C;
+    --medium_orange_trans: #f17f1c81;
+    --dark_orange: #EE6B21;
+    --almost_white: #F3F3F3;
+    --not_black: #252525;
+    --nice_purple: #811CF1;
+    --material_dark: #212121;
+    --grey: #5E5E5E;
+    --textGrey: #BEBEBE;
+    --lightYellow: #FFE082;
+
+    /* new colors */
+    --new-orange: #FFAF81;
+    --new-orange-com: #853329;
+
+    --super-black: #0C0710;
+
+    --purple: #D0A5FF;
+    --purple-comp: #1E0D2A;
+}
+
+#checker {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: url("https://manuelfahmy.de/main/images/checker.png");
+    background-repeat: repeat;
+    opacity: .3;
+}
+
+#scrollToTop {
+    position: fixed;
+    right: 10%;
+    bottom: 5%;
+    z-index: 10;
+    font-size: 40pt;
+    color: var(--almost_white);
+    display: none;
+    cursor: pointer;
+}
+
+.bigHeader {
+    color: var(--dark_orange);
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 7rem;
+    width: fit-content;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.smallHeader {
+    color: #C1C1C1;
+    text-align: center;
+    margin-bottom: 8rem;
+    font-size: small;
+}
+
+#content_wrapper {
+    margin-top: 5rem;
+    position: relative;
+    display: block;
+    margin-left: 20%;
+    margin-bottom: 7rem;
+    width: 60%;
+    min-height: 100vh;
+
+}
+
+#title {
+    font-size: 3rem;
+    margin-top: 7rem;
+    margin-bottom: 7rem;
+    text-align: center;
+    position: relative;
+    color: white;
+}
+
+#artWrapper {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: .1;
+}
+
+.bgArt {
+    z-index: -1;
+    top: 0;
+    position: absolute;
+    overflow: hidden;
+}
+
+.bgArt:first-of-type {
+    left: -1000px;
+}
+
+.bgArt:last-of-type {
+    right: -1100px;
+}
+
+#sureTheresMore {
+    margin-top: 10rem;
+    width: fit-content;
+    display: block;
+    position: relative;
+    color: #C1C1C1;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.back_btn {
+    padding: 0.5rem 2.5rem 0.5rem 2.5rem !important;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* @500 & @700 */
+.poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* @300 & @400 & @700 */
+.roboto {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+/* @300 */
+.rubik {
+    font-family: 'Rubik', sans-serif;
+}
+
+
+.light {
+    font-weight: 300;
+}
+
+.medium {
+    font-weight: 500;
+}
+
+.bold {
+    font-weight: 700;
+}
