@@ -1,0 +1,18 @@
+.h1 {
+    font-size: 50px;
+    color: var(--new-orange);
+    font-weight: 700;
+}
+
+.intro_p {
+    margin-top: 1vh;
+    font-size: 1rem;
+    color: var(--almost_white);
+}
+
+.p {
+    font-size: 25px;
+    color: var(--almost_white);
+    margin: .5rem;
+    margin-left: 0;
+}

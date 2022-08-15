@@ -1,12 +1,21 @@
 import Image from "next/image"
 
+import Button from "../components/Button"
+import Navbar from "../components/Navbar"
+
+// images
+import Pfad66 from "/images/code/Pfad66.webp"
+import Pfad65 from "/images/code/Pfad65.webp"
+
 export default function Code() {
-    
 
 return (
 <>
-<div id="checker"></div>
-<div id="bg"></div>
+    <div id="checker"></div>
+    <div id="bg"></div>
+    <div id="colorOverlay"></div>
+
+    <Navbar />
 
 
 <div id="scrollToTop">
@@ -18,24 +27,20 @@ return (
 
 <div id="artWrapper">
 
-    <Image layout="fill" alt="fancyBackgroundArt" className="bgArt" src="/images/code/Pfad66.webp" />
-    <Image layout="fill" alt="fancyBackgroundArt" className="bgArt" src="/images/code/Pfad65.webp" />
+    <Image layout="fill" alt="fancyBackgroundArt" className="bgArt" src={Pfad66} />
+    <Image layout="fill" alt="fancyBackgroundArt" className="bgArt" src={Pfad65} />
 
 </div>
 
 <div id="content_wrapper">
 
-    <button className="btn btn-secondary back_btn" >
-
-        <a className="brevia_bold">Back</a></button>
+    <Button link="" title="Back" color="purple" />
 
     <h1 id="title" className="poppins">Code</h1>
 
     <h2 className="languagesHeader smallHeader brevia_medium">My tech stack</h2>
 
     <div id="skillsWrapper">
-
-    
 
         <fieldset className="skillGroup">
             <legend className="rubik_light">Web Development</legend>

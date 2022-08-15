@@ -1,9 +1,17 @@
+// components
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import Navbar from '../components/Navbar'
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Scrollbar } from 'swiper';
+
+// styles
+import "swiper/css";
+
+// functions
+import client from '../functions/SanityClient'
+import GetImageUrl from '../functions/GetImageUrl'
 
 // icons
 import { FaGithubSquare, FaLinkedin, FaInstagramSquare, FaBehanceSquare, FaTimes, FaBars } from "react-icons/fa"
@@ -16,7 +24,7 @@ import books from "/images/books.webp"
 import computer from "/images/computer.webp"
 import music from "/images/music.webp"
 
-export default function Home() {
+export default function Home({ data }) {
 return (
   <div>
     <Header title="Manuel Fahmy" description="Hello" />
@@ -25,16 +33,14 @@ return (
     <div id="bg"></div>
     <div id="colorOverlay"></div>
 
-    <div id="scrollToTop"><i className="fas fa-arrow-alt-circle-up"></i></div>
-
     <Navbar />
 
   <div id="mainContent">
-
+  {console.log(data)}
     <section id="page1" className="content_wrapper">
       <div className="page1_leftside">
-        <div className="brevia_bold big_h1">Hi there,</div>
-        <p className="rubik_regular intro_p">I&apos;m Manuel.<br/>I am a <span id="typed"></span></p>
+        <div className="h1">Hi there,</div>
+        <p className="p">I&apos;m Manuel.<br/>I am a <span id="typed"></span></p>
       
         <div id="page1BtnWrapper">
           <Button title="About me" color="primary" />
@@ -42,8 +48,7 @@ return (
       </div>
 
       <div id="lines"><Image layout='fill' src={lines} className="unselectable" alt="lines" /></div>
-      <span className="picture_wrapper"><Image  width={250} height={250} src={selfie} className="picture unselectable" alt="selfie" /></span>
-
+      <span className="picture_wrapper"><Image  width={250} height={250} src={selfie} className="picture unselectable" alt="selfie" /></span>    
     </section>
 
     <div id="lower_content">
@@ -71,7 +76,7 @@ return (
               <div className="about-me-card-content rubik_light">A core philosophy of mine is to always keep on learning new things.</div>
             </div>
             <div className="about-me-card-right">
-              <Image layout="fill" className="about-me-card-image" src={books} alt="" />
+              <Image layout='intrinsic' className="about-me-card-image" src={books} alt="" />
             </div>
           </div>
 
@@ -81,7 +86,7 @@ return (
               <div className="about-me-card-content rubik_light">Through coding I can create new things and solve problems. It also frequently  provides new challenges for me to tackle.</div>
             </div>
             <div className="about-me-card-right">
-              <Image layout="fill" className="about-me-card-image" src={computer} alt="" />
+              <Image layout='intrinsic' className="about-me-card-image" src={computer} alt="" />
             </div>
           </div>
 
@@ -91,7 +96,7 @@ return (
               <div className="about-me-card-content rubik_light">Composing and playing music is great for thinking and relaxing. Especially great to clear your head after coding for an extensive amount of time.</div>
             </div>
             <div className="about-me-card-right">
-              <Image layout="fill" className="about-me-card-image" src={music} alt="" />
+              <Image layout='intrinsic' className="about-me-card-image" src={music} alt="" />
             </div>
           </div>
 
@@ -105,8 +110,63 @@ return (
           <div className="parahraph_wrapper">
             <p className="block_text rubik_light">Currently, I focus on learning Data Science while also continuing to learn fullstack web development.</p>
           </div>
-          <div id="projects" className="collapsible_content">
-            <h2 className="rubik_light smallHeader">my latest projects</h2>
+          <div id="projects">
+            <div id="projects_wrapper"></div>
+            {data.map(project => {
+              const year = new Date(project.publishedAt).getFullYear();
+              return (
+              <>
+              <h1 style={{zIndex: 1, textAlign: "right", width: "90%", fontSize: 50, color: "#fff5", position: "absolute"}}>{year}</h1>
+              <div key={project.slug} className="latest-projects-card ">
+                
+                <div className='latest-projects-card-left'>
+                  <Swiper 
+                    modules={[Scrollbar]}
+                    spaceBetween={35}
+                    slidesPerView={1}
+                    className="swiper"
+                    direction='horizontal'
+                    loop={true}
+                    style={{ width: "inherit", height: "inherit" }}
+                  >
+                    {project.images.map(image => {
+                      const imageUrl = GetImageUrl(image)
+                      return(
+                        <SwiperSlide key={image._key}>
+                          <Image style={{width: "100%", height:"100%", boxSizing: "border-box"}} key={image._key} layout="fill" className="latest-projects-card-image" src={imageUrl} alt="aaaa" />
+                        </SwiperSlide>
+                      )
+                    })}
+                  </Swiper>
+                </div>
+
+                <div className="latest-projects-card-right">
+
+                  <h1 style={{color: "white"}}>{project.title}</h1>
+                  <div className='latest-projects-card-tags'>
+                    {project.categories.map(tag => (
+                      <span key={tag} className="latest-projects-card-tag">{tag}</span>
+                    ))}
+                  </div>
+
+                  <div>
+                    <h3>Description</h3>
+                    <div style={{color: "white", fontWeight: 300}}>{project.description}</div>
+                  </div>
+
+                  <div style={{backgroundColor: "#fff8", height: ".1rem", width: "100%", margin: "1rem 0"}}></div>
+
+                  <div>
+                    <h3>What I learned</h3>
+                    <div style={{color: "white", fontWeight: 300}}>{project.learned}</div>
+                  </div>
+          
+                </div>
+
+              </div>
+              </>
+            )})}
+            
           </div>
         </section>
       </div>
@@ -136,4 +196,16 @@ return (
   </div>
 
   )
+}
+
+
+export async function getStaticProps() {
+  const data = await client.fetch(`*[_type == "post"] {
+    ...,
+    projecttype->,
+    author->
+
+  }`)
+
+  return { props: { data } }
 }
