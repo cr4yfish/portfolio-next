@@ -20,6 +20,18 @@
 
   --purple: #D0A5FF;
   --purple-comp: #1E0D2A;
+
+  --swiper-pagination-color: #D0A5FF;
+  --swiper-pagination-bullet-inactive-color: #000000;
+}
+
+.swiper-pagination-bullet {
+  border: 1px solid white;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  border: 2px solid #D0A5FF;
 }
 
 html,
@@ -772,6 +784,10 @@ ul li::before {
 /* footer*/
 
 
+footer {
+  margin-bottom: 2rem;
+}
+
 .footer_inner {
   display: flex;
   justify-content: space-between;
@@ -1006,4 +1022,10 @@ footer span {
 
 #latest_news .card::before {
   background-image: none;
+}
+
+
+/* overriding zoom background */
+[data-rmiz-modal-overlay="visible"] {
+  background-color: rgba(3, 3, 3, 0.589) !important;
 }

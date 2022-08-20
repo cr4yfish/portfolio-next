@@ -3,11 +3,15 @@ import Image from 'next/image'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import Navbar from '../components/Navbar'
+import { Navigation, Pagination, Scrollbar } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Scrollbar } from 'swiper';
+import Zoom from 'react-medium-image-zoom'
 
 // styles
 import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "react-medium-image-zoom/dist/styles.css";
 
 // functions
 import client from '../functions/SanityClient'
@@ -111,20 +115,35 @@ return (
             <p className="block_text rubik_light">Currently, I focus on learning Data Science while also continuing to learn fullstack web development.</p>
           </div>
           <div id="projects">
-            <div id="projects_wrapper"></div>
+          {/*<div id="projects_wrapper"></div>*/}
+           <Swiper 
+            modules={[ Pagination, Scrollbar ]}
+            spaceBetween={75}
+            slidesPerView={1}
+            className="swiper"
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            direction='horizontal'
+            loop={true}
+            style={{ width: "inherit", height: "inherit" }}
+           >
             {data.map(project => {
               const year = new Date(project.publishedAt).getFullYear();
               return (
               <>
-              <h1 style={{zIndex: 1, textAlign: "right", width: "90%", fontSize: 50, color: "#fff5", position: "absolute"}}>{year}</h1>
+              <SwiperSlide>
+
+               
+              <h1 style={{zIndex: 1, textAlign: "right", width: "97%", fontSize: 50, color: "#fff5", position: "absolute"}}>{year}</h1>
               <div key={project.slug} className="latest-projects-card ">
                 
                 <div className='latest-projects-card-left'>
                   <Swiper 
-                    modules={[Scrollbar]}
+                    modules={[ Pagination ]}
                     spaceBetween={35}
                     slidesPerView={1}
-                    className="swiper"
+                    className="imageSwiper"
+                    pagination={{ clickable: true }}
                     direction='horizontal'
                     loop={true}
                     style={{ width: "inherit", height: "inherit" }}
@@ -133,13 +152,13 @@ return (
                       const imageUrl = GetImageUrl(image)
                       return(
                         <SwiperSlide key={image._key}>
-                          <Image style={{width: "100%", height:"100%", boxSizing: "border-box"}} key={image._key} layout="fill" className="latest-projects-card-image" src={imageUrl} alt="aaaa" />
+                          <Zoom><Image style={{width: "100%", height:"100%", boxSizing: "border-box"}} key={image._key} width={500} height={500} className="latest-projects-card-image" src={imageUrl} alt="aaaa" /></Zoom>
                         </SwiperSlide>
                       )
                     })}
                   </Swiper>
                 </div>
-
+              
                 <div className="latest-projects-card-right">
 
                   <h1 style={{color: "white"}}>{project.title}</h1>
@@ -164,9 +183,10 @@ return (
                 </div>
 
               </div>
+              </SwiperSlide>
               </>
             )})}
-            
+            </Swiper>
           </div>
         </section>
       </div>

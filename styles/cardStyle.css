@@ -118,8 +118,12 @@
 .latest-projects-card {
     z-index: 1;
     cursor: pointer;
+    background-color: #d0a5ff13;
+    border-radius: 15px;
+    flex-wrap: wrap;
+    padding: 2.5rem .5rem;
     transition: .25s all;
-    height: 25em;
+    height: fit-content;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -128,21 +132,29 @@
 }
 
 .latest-projects-card-left {
-    width: 15rem;
-    height: 100%;
+    width: 30rem;
+    height: 25rem;
+    border-radius: 9px !important;
 }
+
 
 .latest-projects-card-right {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     width: 20rem;
+    height: 50%;
     padding-left: 1rem;
 }
 
 .latest-projects-card-image {
-    height: 15rem;
-    width: 20rem;
-    border-radius: 9px;
+    height: 100% !important;
+    width: auto !important;
+    min-width: unset!important;
+    min-height: unset!important;
+    max-width: unset!important;
+    max-height: unset!important;
+    transform: translateX(-25%);
 }
 
 .latest-projects-card-tags {
